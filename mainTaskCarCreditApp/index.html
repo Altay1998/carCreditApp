@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+    <main class="">
+          <header class="bg-primary">
+            <div class="container">
+              <div class="row text-center">
+                  <div class="col-12"><H2>CarCreditApp</H2></div>
+              </div>
+            </div>
+          </header>
+          <section class="container">
+            <div class="row sec d-flex flex-wrap m-2"></div>
+          </section>
+          <section >
+              <div class="container">
+                <div class="row ">
+                  <div class="col-7 col-md-5 m-auto">
+                      <nav aria-label="Page navigation example">
+                          <ul class="pagination">
+                            <li class="page-item "><a class="page-link" href="#">Previous</a></li>
+                            
+                            <li class="page-item next"><a class="page-link" href="#">Next</a></li>
+                          </ul>
+                        </nav>
+                  </div>
+              </div>
+              </div>
+          </section>
+       
+    </main> 
+    <script src="js/car.js"></script>
+    <script src="js/operations.js"></script>
+    <script>
+      let a=document.getElementsByClassName('sec')[0];
+      let b=a.childNodes;
+    //   setTimeout(()=>{
+    //  if(b.length==1){
+    //           a.classList.remove('justify-content-around');
+    //  }else{
+    //   a.classList.add('justify-content-around');
+    //  }
+    //  },10);
+    document.addEventListener('DOMContentLoaded',()=>{
+      let pac=Math.ceil(car.length/12);
+      let pacination=sessionStorage['pac'];
+      if(pacination==undefined||pacination==null){
+        sessionStorage['pac']=1;
+      }
+       if(pacination>2){
+        document.getElementsByClassName('page-link')[0].addEventListener('click',()=>{
+           let pc=parseInt(sessionStorage["pac"]);
+           sessionStorage.setItem('pac',pc-1);
+           document.location.reload();
+           
+         })
+      }
+      if(pacination<pac){
+        document.getElementsByClassName('page-link')[1].addEventListener('click',()=>{
+           let pc=parseInt(sessionStorage["pac"]);
+           sessionStorage.setItem('pac',pc+1);
+           document.location.reload();
+         })
+
+      }
+      
+        
+       
+        
+        createPacination(pac,5);
+        createPage(car);
+        getActiveList();
+    })
+    
+    </script>
+   
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>

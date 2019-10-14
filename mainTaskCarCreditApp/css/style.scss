@@ -1,0 +1,31 @@
+@media screen and (max-width:1000px){
+    p{
+        font-size: 15px;
+    }
+}
+
+.design-div{
+    border: 2px solid ;
+    padding: 20px;
+}
+header{
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+   h2{
+        color: white;
+    }
+}
+img{
+    width: 100%;
+    object-fit: cover;
+    height: 100%;
+
+}
+p{
+    font-size: 10px;
+}
+.hov:hover{
+    cursor: pointer;
+}

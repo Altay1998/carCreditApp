@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <style>
+
+        .conteiner{
+            width: 40%;
+            margin:auto;
+        }
+        .center div{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .center label{
+            width: 50%;
+        }
+        .center input{
+            width: 50%;
+        }
+    </style>
+    <div class="conteiner">
+            <header class="bg-primary">
+                    <div class="row text-center">
+                        <div class="col-12">
+                            <H2>Hokumet odeme portali</H2>
+                        </div>
+                    </div>
+            </header>
+            <div class="center">
+                <form action="">
+                    <div class="cardnumber mt-2">
+                        <label for="">Kartin nomresi</label>
+                        <input type="text" id="crdNUm" >
+                    </div>
+                    <div class="cardDate mt-2">
+                        <label for="">Bitme tarixi</label>
+                        <input type="text" id="crddate" >
+                    </div>
+                    <div class="cardCvv mt-2">
+                        <label for="">CVV</label>
+                        <input type="text" id="crdCvv" >
+                    </div>
+                    <div class="mt-2"> 
+                        <label for="">Mebleg</label>
+                        <input type="text" id="cash">
+                    </div>
+                    <div class="mt-4">
+                        <input type="submit" id="sub" class="m-auto ">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<script src="js/informationPageOperation.js"></script>
+    <script>
+        let cardInfo = function (cardNum, date, cvv, cash) {
+            this.num = cardNum;
+            this.date = date;
+            this.cvv = cvv;
+            this.cash = cash;
+
+        }
+        
+        let element = sessionStorage['array'];
+        let month = sessionStorage['month'];
+        let obj = JSON.parse(sessionStorage['array']);
+        let obj2 = parseInt(sessionStorage['month']);
+        document.getElementById('cash').value=obj.forCredit;
+                let cards = {
+            card1: new cardInfo('12345678', '2010', '123', '123'),
+            card2: new cardInfo('23442422', '2010', '234', '123'),
+            card3: new cardInfo('43543543', '2010', '453', '123'),
+            card4: new cardInfo('53454355', '2010', '545', '10000'),
+            card5: new cardInfo('34353455', '2010', '654', '123'),
+            card6: new cardInfo('53234554', '2010', '756', '123'),
+            card7: new cardInfo('53453455', '2010', '235', '123'),
+            card8: new cardInfo('23443242', '2010', '666', '123'),
+        }
+
+        let pay = function (array) {
+            let cardnum = document.getElementById("crdNUm");
+            let cardDate = document.getElementById("crddate");
+            let cardCvv = document.getElementById("crdCvv");
+            let cardcash = parseInt(document.getElementById("cash").value);
+            
+            if (checkCardInfo(cardnum,cardDate,cardCvv)){
+            for (let f in cards) {
+                
+                if ((cardnum.value==cards[f].num)&&(cardcash<=parseInt(cards[f].cash))) {
+                    cards[f].cash -= cardcash;
+                    let result=Math.ceil(calculateCredit(parseInt(obj.price),cardcash,obj2));
+                    let message=`Odenis ugurla heyata kecirildi.Her ayliq odenis ${result}\n`;
+                    alert(message);
+                }
+                else if ((cardnum.value==cards[f].num)&&(cardcash>parseInt(cards[f].cash))) {
+                    alert("Balans azdir");
+                }
+            }
+
+        }}
+        let checkCardInfo = function (num, date, cvv) {
+            this.message = '';
+            let error=null;
+            let cout=0;
+            for (let f in cards) {
+                
+                if (cards[f].num == num.value) {
+                    cout=0;
+                    if (cards[f].date == date.value)   {
+                        if (cards[f].cvv == cvv.value)   {
+                            return true;
+                    } else{
+                        error=errorMessage(cvv);
+                        return false;
+                    }
+                    }  else{
+                        error=errorMessage(date);
+                        return false;
+                    } 
+                    break;         
+               } 
+               cout++;
+            }
+            if(cout!=0){
+                error= errorMessage(num);
+                return false;
+            }
+            
+        }
+        let errorMessage=function(where,){
+            let sp=document.createElement('span');
+            sp.innerText="Error";
+            sp.style.color="red";
+            sp.style.width="100%";
+            sp.style.display="block";
+            let el=where.parentNode;
+            el.appendChild(sp);
+            setTimeout(()=>{
+                el.removeChild(sp);
+            },1000);
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('sub').addEventListener('click', (e) => {
+                e.preventDefault();
+                pay();
+            });
+            let f=document.getElementsByTagName('input');
+            for (let t of f){
+                t.addEventListener('keypress',(e)=>{
+                    if(e.which>64){
+                        e.preventDefault();
+                        alert('ancaq reqem');
+                    }
+                })
+            }
+        })
+    </script>
+</body>
+
+</html>

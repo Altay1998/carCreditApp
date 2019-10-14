@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <main class="">
+        <header class="bg-primary">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-12">
+                        <H2>CarCreditApp</H2>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-12 border border-primary">
+                    <table class="table">
+
+                        <tbody>
+                            <tr>
+                                <th scope="row">Price</th>
+                            </tr>
+                        </tbody>
+                        <tr>
+                            <th scope="row">Minimum price for credit</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Year</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Mileage</th>
+                        </tr>
+                        <tr>
+                            <th scope="row"> Advertise date</th>
+                        </tr>
+                    </table>
+                    <div class="btn-group btn-group-toggle m-2" data-toggle="buttons">
+                        <label class="bt btn btn-secondary active">
+                         <input type="radio" name="options" id="option1" autocomplete="off" > 6 month
+                        </label>
+                        <label class="btn bt btn-secondary">
+                            <input type="radio" name="options" id="option2" autocomplete="off"> 12 Month
+                        </label>
+                        <label class="btn bt btn-secondary">
+                            <input type="radio" name="options" id="option3" autocomplete="off"> 18 Month
+                        </label>
+                    </div>
+                </div>
+                <div class="col-12 border border-primary txt ">
+                    
+                    <div class="form-group">
+                        <textarea class="form-control mt-3" id="exampleFormControlTextarea1" rows="3" style="overflow: auto; resize: none;" placeholder="Add comment ..."></textarea>
+                    <button class="btn btn-primary mt-3" id="snd">Send Comment</button>  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/car.js"></script>
+    <script src="js/operations.js"></script>
+    <script src="js/informationPageOperation.js"></script>
+    <script>
+        let element = sessionStorage['array'];
+        let obj = JSON.parse(sessionStorage['array']);
+        createTable(obj);
+       let aa= document.getElementsByClassName('bt');
+       for(let f of aa){
+           f.addEventListener('click',()=>{
+               sessionStorage.setItem('month',parseInt(f.innerText));
+                 document.location='pay.html';
+           })
+       }
+       document.getElementById('snd').addEventListener('click',()=>{
+           let msg=document.getElementById("exampleFormControlTextarea1").value;
+           let p=createElement('p',null,null,msg,null);
+           document.getElementsByClassName('txt')[0].insertBefore(p,document.getElementsByClassName('form-group')[0]);
+           document.getElementById("exampleFormControlTextarea1").value='';
+       })
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
